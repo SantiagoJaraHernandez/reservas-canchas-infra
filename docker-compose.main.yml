@@ -28,7 +28,7 @@ services:
       - reservas-main-net
 
   ms-auth:
-    build: ../ms-auth
+    build: ../reservas-canchas-ms-auth
     container_name: reservas-main-ms-auth
     restart: always
     environment:
@@ -43,7 +43,7 @@ services:
       - reservas-main-net
 
   ms-reservas:
-    build: ../ms-reservas
+    build: ../reservas-canchas-ms-reservas
     container_name: reservas-main-ms-reservas
     restart: always
     environment:
@@ -61,7 +61,7 @@ services:
       - reservas-main-net
 
   gateway:
-    build: ../gateway
+    build: ../reservas-canchas-gateway
     container_name: reservas-main-gateway
     restart: always
     environment:
