@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: reservas-qa-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: reservasdb_qa
+      POSTGRES_USER: reservas
+      POSTGRES_PASSWORD: reservas123
+    ports:
+      - "5435:5432"
+    volumes:
+      - postgres_qa_data:/var/lib/postgresql/data
+    networks:
+      - reservas-qa-net
+
+  mongodb:
+    image: mongo:7
+    container_name: reservas-qa-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: authdb_qa
+    ports:
+      - "27019:27017"
+    volumes:
+      - mongodb_qa_data:/data/db
+    networks:
+      - reservas-qa-net
+
+volumes:
+  postgres_qa_data:
+  mongodb_qa_data:
+
+networks:
+  reservas-qa-net:
+    name: reservas-qa-net
+    driver: bridge

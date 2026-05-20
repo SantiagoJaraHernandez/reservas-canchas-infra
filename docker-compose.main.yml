@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: reservas-main-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: reservasdb_main
+      POSTGRES_USER: reservas
+      POSTGRES_PASSWORD: reservas123
+    ports:
+      - "5436:5432"
+    volumes:
+      - postgres_main_data:/var/lib/postgresql/data
+    networks:
+      - reservas-main-net
+
+  mongodb:
+    image: mongo:7
+    container_name: reservas-main-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: authdb_main
+    ports:
+      - "27020:27017"
+    volumes:
+      - mongodb_main_data:/data/db
+    networks:
+      - reservas-main-net
+
+volumes:
+  postgres_main_data:
+  mongodb_main_data:
+
+networks:
+  reservas-main-net:
+    name: reservas-main-net
+    driver: bridge
